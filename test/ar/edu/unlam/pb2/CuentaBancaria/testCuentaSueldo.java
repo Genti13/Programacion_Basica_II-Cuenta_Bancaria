@@ -5,8 +5,8 @@ import org.junit.Test;
 
 public class testCuentaSueldo {
 
-	private static final Double SALDO_A_SUMAR = 170.0;
 	private static final Double SALDOINICIAL = 0.0;
+	private static final Double SALDO_A_SUMAR = 170.0;
 	private static final Double SALDO_A_EXTRAER = 150.0;
 	private static final Double SALDO_EN_CUENTA = 300.0;
 
@@ -14,8 +14,6 @@ public class testCuentaSueldo {
 	public void creoLaCuenta() {
 
 		CuentaSueldo cuenta = cuentaSueldo();
-
-		cuandoEsUnaCuentaNueva(cuenta);
 
 		elSaldoDeberiaSerCero(cuenta);
 	}
@@ -40,11 +38,7 @@ public class testCuentaSueldo {
 		elSaldoDeberiaDescontarse(cuenta, saldoAnterior, SALDO_A_EXTRAER);
 	}
 
-	private CuentaSueldo dadoQueExistecuentaSueldo(Double saldoASumar) {
-
-		return new CuentaSueldo(saldoASumar);
-	}
-
+//Operaciones
 	private void cuandoExtraigoDeLaCuenta(CuentaSueldo cuenta, Double saldoAExtraer) {
 		if (cuenta.getSaldo() - saldoAExtraer >= 0)
 			cuenta.retirarDinero(saldoAExtraer);
@@ -54,16 +48,19 @@ public class testCuentaSueldo {
 		cuenta.agregarSaldo(plata);
 	}
 
-	private void cuandoEsUnaCuentaNueva(CuentaSueldo cuenta) {
-		cuenta.saldoInicial();
-	}
+//Creo Cuentas
+	private CuentaSueldo dadoQueExistecuentaSueldo(Double saldoASumar) {
 
-	private void elSaldoDeberiaSerCero(CuentaSueldo cuenta) {
-		Assert.assertEquals(SALDOINICIAL, cuenta.getSaldo());
+		return new CuentaSueldo(saldoASumar);
 	}
 
 	private CuentaSueldo cuentaSueldo() {
 		return new CuentaSueldo();
+	}
+
+//Asserts
+	private void elSaldoDeberiaSerCero(CuentaSueldo cuenta) {
+		Assert.assertEquals(SALDOINICIAL, cuenta.getSaldo());
 	}
 
 	private void elSaldoDeberiaDescontarse(CuentaSueldo cuenta, Double saldoAnterior, Double saldoAExtraer) {
@@ -73,5 +70,4 @@ public class testCuentaSueldo {
 	private void elSaldoDeberiaAgregarse(CuentaSueldo cuenta, Double saldoAnterior, Double saldoASumar) {
 		Assert.assertEquals(cuenta.getSaldo(), (Double) (saldoAnterior + saldoASumar));
 	}
-
 }
